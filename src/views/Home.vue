@@ -21,7 +21,7 @@
               rel="noopener noreferrer"
               >Breast Cancer</a
             >
-            is one of leading cause death among women, Hack 4 Pink is an effort
+            is one of the leading cause death among women, Hack 4 Pink is an
             develop AI solutions to combat the disease.
           </p>
 

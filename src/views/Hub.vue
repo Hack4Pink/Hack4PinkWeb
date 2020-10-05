@@ -14,7 +14,7 @@
         
       </li>
       <li class="nav-item">
-        <a class="nav-link" @click.prevent="setActive('profile')" :class="{ active: isActive('profile') }" href="#profile">Research Papers</a>
+        <a class="nav-link" @click.prevent="setActive('profile')" :class="{ active: isActive('profile') }" href="#profile">News Articles</a>
       </li>
     </ul>
     <div class="tab-content py-3" id="myTabContent">
@@ -215,4 +215,61 @@ export default {
 h4 {
   margin: 10px;
 }
+
+ article {
+      display: grid;
+      grid-template-columns: 200px auto 40px;
+      grid-template-rows: 100px;
+      border-bottom: 1px solid #ccc;
+      overflow: hidden;
+      cursor: pointer;
+ }
+      header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+        i {
+          font-size: 2rem;
+        }
+       #scroll-trigger {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100px;
+      font-size: 1.6rem;
+    }
+
+
+     section {
+        margin: 0;
+        padding: 10px;
+        height: 100px;
+      }
+      footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.6rem;
+        color: #888;
+      }
+
+      .search-icons {
+        color: palevioletred;
+      }
+        i {
+          margin-left: 15px;
+          cursor: pointer;
+        }
+       .searchbar {
+      font-size: 1.6rem;
+      }
+
+
 </style>

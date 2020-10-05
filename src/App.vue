@@ -8,6 +8,8 @@
 <script>
 import Navigation from "@/components/Navigation.vue";
 import Firebase from "firebase";
+
+
 // eslint-disable-next-line no-unused-vars
 import db from "./db.js";
 export default {
@@ -45,4 +47,5 @@ export default {
 <style lang="scss">
 $primary: #ff96a7;
 @import "node_modules/bootstrap/scss/bootstrap";
+@import url("https://use.fontawesome.com/releases/v5.7.2/css/all.css");
 </style>

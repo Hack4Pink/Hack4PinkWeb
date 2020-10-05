@@ -14,7 +14,8 @@ export default {
   name: "App",
   data: function() {
     return {
-      user: null
+      user: null,
+      apiKey: '89759c334b7c43ba80437587fbfda932'
     };
   },
   methods: {

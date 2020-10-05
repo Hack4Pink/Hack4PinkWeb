@@ -49,7 +49,7 @@
     <br>
     <b-container class="text-left">
       <b-row >
-        <b-col md="7"><div class="pad"> Take a Symptom test</div> </b-col>
+        <b-col md="7"><div class="pad"> Enter Information for Screening</div> </b-col>
         <b-col md="2"><router-link class="btn btn-primary" to="/symptoms">Click Here</router-link></b-col>
         <b-col md="1" v-if="doneQ"><b-icon icon="check-circle" variant="success"></b-icon></b-col>
       </b-row>

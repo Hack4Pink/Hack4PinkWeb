@@ -17,7 +17,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(Appointment, index) in Appointments" :key="index">
+            <tr v-for="(Appointment, index) in appointments" :key="index">
               <td>{{ Appointment.email }}</td>
               <td>{{ Appointment.doctor }}</td>
               <td>{{ Appointment.date }}</td>

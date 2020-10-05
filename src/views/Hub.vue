@@ -40,7 +40,33 @@
       </div>
     </div>
       </div>
-      <div class="tab-pane fade" :class="{ 'active show': isActive('profile') }" id="profile">Profile content</div>
+      <div class="tab-pane fade" :class="{ 'active show': isActive('profile') }" id="profile">
+        <div class="searchbar">
+      <form @submit.prevent="fetchSearchNews">
+        <input type="text" placeholder="search..." v-model="searchword">
+      </form>
+      <div class="search-icons">
+        <i v-if="!isBusy" class="fas fa-search" @click="fetchSearchNews"></i>
+        <i v-else class="fas fa-spinner fa-spin"></i>
+        <i class="fas fa-times" @click="fetchTopNews"></i>
+      </div>
+    </div>
+    <div class="result-list">
+      <article v-for="(article, index) in articles" :key="index" @click="navTo(article.url)">
+        <header>
+          <img v-if="article.urlToImage" :src="article.urlToImage" alt="">
+          <i v-else class="fas fa-image"></i>
+        </header>
+        <section v-html="article.title"></section>
+        <footer>
+          <i class="fas fa-chevron-right"></i>
+        </footer>
+      </article>
+    </div>
+    <div ref="infinitescrolltrigger" id="scroll-trigger">
+      <i v-if="showloader" class="fas fa-spinner fa-spin"></i>
+    </div>
+      </div>
       <div class="tab-pane fade" :class="{ 'active show': isActive('contact') }" id="contact">Contact content</div>
     </div>
     
@@ -51,15 +77,33 @@
 <script>
 import axios from "axios";
 export default {
+   props: [
+      'apiKey'
+    ],
   name: "Search",
   data() {
     return {
       activeItem: 'home',
       msg: "Search",
       query: "",
-      info: ""
+      info: "",
+          apiUrl: '',
+        isBusy: false,
+        showloader: false,
+        currentPage: 1,
+        totalResults: 0,
+        maxPerPage: 20,
+        searchword: '',
+        articles: [],  
     };
   },
+
+    computed: {
+      pageCount() {
+        return Math.ceil(this.totalResults/this.maxPerPage);
+      }
+    },
+
   methods: {
     getResult(query) {
       axios
@@ -71,8 +115,74 @@ export default {
     },
     setActive (menuItem) {
       this.activeItem = menuItem
+    },
+  navTo(url) {
+        window.open(url);
+      },
+      resetData() {
+        this.currentPage = 1;
+        this.articles = [];
+      },
+      fetchSearchNews() {
+        if(this.searchword !== '')
+        {
+          this.apiUrl = 'https://newsapi.org/v2/everything?q=' + this.searchword +
+                        '&pageSize=' + this.maxPerPage +
+                        '&apiKey=' + '89759c334b7c43ba80437587fbfda932';
+          this.isBusy = true;
+          this.resetData();
+          this.fetchData();
+        }
+        else {
+          this.fetchTopNews();
+        }
+      },
+      fetchTopNews() {
+        this.apiUrl = 'https://newsapi.org/v2/everything?q=breast cancer' +
+                        '&pageSize=' + this.maxPerPage +
+                        '&apiKey=' + '89759c334b7c43ba80437587fbfda932';
+        this.isBusy = true;
+        this.searchword = '';
+        
+        this.resetData();
+        this.fetchData();
+      },
+      fetchData() {
+        let req  = new Request(this.apiUrl + '&page=' + this.currentPage);
+        fetch(req)
+          .then((resp) => resp.json())
+          .then((data) => {
+            this.totalResults = data.totalResults;
+            data.articles.forEach(element => {
+              this.articles.push(element);
+            });
+            this.isBusy = false;
+            this.showloader = false;
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+      },
+      scrollTrigger() {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if(entry.intersectionRatio > 0 && this.currentPage < this.pageCount) {
+              this.showloader = true;
+              this.currentPage += 1;
+              this.fetchData();
+            }
+          });
+        });
+        observer.observe(this.$refs.infinitescrolltrigger);
+      }
+    },
+    created() {
+      this.fetchTopNews();
+    },
+     mounted() {
+      this.scrollTrigger();
     }
-  }
+
 };
 </script>
 

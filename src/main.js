@@ -1,3 +1,5 @@
+import "bootstrap/dist/css/bootstrap.css";
+import BootstrapVue from 'bootstrap-vue';
 import Vue from "vue";
 import App from "./App.vue";
 import "./registerServiceWorker";
@@ -18,6 +20,7 @@ import {
 library.add(faTrash, faLink, faListUl, faRandom, faUndo, faStar, faEnvelope);
 
 Vue.config.productionTip = false;
+Vue.use(BootstrapVue);
 
 new Vue({
   router,

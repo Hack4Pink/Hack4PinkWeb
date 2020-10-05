@@ -9,7 +9,6 @@
 import Navigation from "@/components/Navigation.vue";
 import Firebase from "firebase";
 
-
 // eslint-disable-next-line no-unused-vars
 import db from "./db.js";
 export default {
@@ -17,7 +16,7 @@ export default {
   data: function() {
     return {
       user: null,
-      apiKey: '89759c334b7c43ba80437587fbfda932'
+      apiKey: "89759c334b7c43ba80437587fbfda932"
     };
   },
   methods: {

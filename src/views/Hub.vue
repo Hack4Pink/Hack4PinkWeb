@@ -150,12 +150,12 @@ export default {
     fetchSearchNews() {
       if (this.searchword !== "") {
         this.apiUrl =
-          "https://newsapi.org/v2/everything?q=" +
+          "https://gnews.io/api/v4/search?q=" +
           this.searchword +
           "&pageSize=" +
           this.maxPerPage +
-          "&apiKey=" +
-          "89759c334b7c43ba80437587fbfda932";
+          "&token=" +
+          "b7ca7908d655d3623b5440526848bb58";
         this.isBusy = true;
         this.resetData();
         this.fetchData();
@@ -165,11 +165,11 @@ export default {
     },
     fetchTopNews() {
       this.apiUrl =
-        "https://newsapi.org/v2/everything?q=breast cancer" +
+        "https://gnews.io/api/v4/search?q=breast cancer" +
         "&pageSize=" +
         this.maxPerPage +
-        "&apiKey=" +
-        "89759c334b7c43ba80437587fbfda932";
+        "&token=" +
+        "b7ca7908d655d3623b5440526848bb58";
       this.isBusy = true;
       this.searchword = "";
 
